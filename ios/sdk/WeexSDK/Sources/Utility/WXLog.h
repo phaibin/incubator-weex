@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, WXLogFlag) {
 /**
  *  Use Log levels to filter logs.
  */
-typedef NS_ENUM(NSUInteger, WXLogLevel){
+typedef NS_ENUM(NSUInteger, WeexLogLevel){
     /**
      *  No logs
      */
@@ -77,7 +77,7 @@ typedef NS_ENUM(NSUInteger, WXLogLevel){
 /**
  * External log level.
  */
-- (WXLogLevel)logLevel;
+- (WeexLogLevel)logLevel;
 
 - (void)log:(WXLogFlag)flag message:(NSString *)message;
 
@@ -85,9 +85,9 @@ typedef NS_ENUM(NSUInteger, WXLogLevel){
 
 @interface WXLog : NSObject
 
-+ (WXLogLevel)logLevel;
++ (WeexLogLevel)logLevel;
 
-+ (void)setLogLevel:(WXLogLevel)level;
++ (void)setLogLevel:(WeexLogLevel)level;
 
 + (NSString *)logLevelString;
 

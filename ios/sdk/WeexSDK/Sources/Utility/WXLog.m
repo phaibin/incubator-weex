@@ -47,16 +47,16 @@
 // Insert the ESCAPE_SEQ into your string, followed by ";"
 
 #ifdef DEBUG
-static const WXLogLevel defaultLogLevel = WXLogLevelLog;
+static const WeexLogLevel defaultLogLevel = WXLogLevelLog;
 #else
-static const WXLogLevel defaultLogLevel = WXLogLevelWarning;
+static const WeexLogLevel defaultLogLevel = WXLogLevelWarning;
 #endif
 
 static id<WXLogProtocol> _externalLog;
 
 @implementation WXLog
 {
-    WXLogLevel _logLevel;
+    WeexLogLevel _logLevel;
 }
 
 + (instancetype)sharedInstance
@@ -71,7 +71,7 @@ static id<WXLogProtocol> _externalLog;
 }
 
 
-+ (void)setLogLevel:(WXLogLevel)level
++ (void)setLogLevel:(WeexLogLevel)level
 {
     if (((WXLog*)[self sharedInstance])->_logLevel != level) {
         ((WXLog*)[self sharedInstance])->_logLevel = level;
@@ -88,7 +88,7 @@ static id<WXLogProtocol> _externalLog;
 #pragma clang diagnostic pop
 }
 
-+ (WXLogLevel)logLevel
++ (WeexLogLevel)logLevel
 {
     return ((WXLog*)[self sharedInstance])->_logLevel;
 }
