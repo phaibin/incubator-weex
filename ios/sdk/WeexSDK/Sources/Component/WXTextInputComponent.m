@@ -65,10 +65,10 @@
 }
 
 - (void)deleteBackward {
-    [super deleteBackward];
     if (self.deleteBlock) {
         self.deleteBlock();
     }
+    [super deleteBackward];
 }
 
 @end
