@@ -63,6 +63,14 @@
 {
     return [self textRectForBounds:bounds];
 }
+
+- (void)deleteBackward {
+    [super deleteBackward];
+    if (self.deleteBlock) {
+        self.deleteBlock();
+    }
+}
+
 @end
 
 @interface WXTextInputComponent()
@@ -88,6 +96,10 @@
 - (UIView *)loadView
 {
     _inputView = [[WXTextInputView alloc] init];
+    __weak typeof(self) weakSelf = self;
+    _inputView.deleteBlock = ^ {
+        [weakSelf fireEvent:@"delete" params:nil];
+    };
     return _inputView;
 }
 

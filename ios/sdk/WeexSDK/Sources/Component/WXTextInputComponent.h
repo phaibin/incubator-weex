@@ -21,11 +21,12 @@
 #import <UIKit/UIKit.h>
 #import "WXEditComponent.h"
 
-@interface WXTextInputView : UITextField
+@interface WXTextInputView : UITextField<UIKeyInput>
 @property (nonatomic, assign) UIEdgeInsets border;
 @property (nonatomic, assign) UIEdgeInsets padding;
 @property (nonatomic, assign) BOOL deleteWords;
 @property (nonatomic, strong) NSString *editWords;
+@property (nonatomic, copy) void (^deleteBlock)(void);
 @end
 
 @interface WXTextInputComponent : WXEditComponent
