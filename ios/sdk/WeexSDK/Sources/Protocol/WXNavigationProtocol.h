@@ -134,6 +134,20 @@ typedef void (^WXNavigationResultBlock)(NSString *code, NSDictionary * responseD
 @optional
     
 /**
+ * @abstract Pop to the root view controller in the navigation stack.
+ *
+ * @param param The data which is passed to the implementation of the protocol.
+ *
+ * @param block A block called once the action is completed.
+ *
+ * @param container The target controller.
+ *
+ */
+- (void)popToRootViewControllerWithParam:(NSDictionary *)param
+                              completion:(WXNavigationResultBlock)block
+                           withContainer:(UIViewController *)container;
+
+/**
  * @abstract open the resource at the specified URL which supports many common schemes, including the http, https, tel and mailto schemes.
  *
  * @param param The data which is passed to the implementation of the protocol.
