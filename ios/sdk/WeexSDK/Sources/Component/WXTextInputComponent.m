@@ -77,6 +77,7 @@
 
 @property (nonatomic, strong) WXTextInputView *inputView;
 @property (nonatomic, assign) BOOL allowCopyPaste;
+@property (nonatomic, assign) BOOL showClearWhileEditing;
 
 @end
 
@@ -89,6 +90,9 @@
         if (attributes[@"allowCopyPaste"]) {
             _allowCopyPaste = [WXConvert BOOL:attributes[@"allowCopyPaste"]];
         }
+        if (attributes[@"showClearWhileEditing"]) {
+            _showClearWhileEditing = [WXConvert BOOL:attributes[@"showClearWhileEditing"]];
+        }
     }
     return self;
 }
@@ -100,6 +104,9 @@
     _inputView.deleteBlock = ^ {
         [weakSelf fireEvent:@"delete" params:nil];
     };
+    if (_showClearWhileEditing) {
+        _inputView.clearButtonMode = UITextFieldViewModeWhileEditing;
+    }
     return _inputView;
 }
 
@@ -107,6 +114,9 @@
     [super updateAttributes:attributes];
     if (attributes[@"allowCopyPaste"]) {
         _allowCopyPaste = [WXConvert BOOL:attributes[@"allowCopyPaste"]];
+    }
+    if (attributes[@"showClearWhileEditing"]) {
+        _showClearWhileEditing = [WXConvert BOOL:attributes[@"showClearWhileEditing"]];
     }
 }
 
