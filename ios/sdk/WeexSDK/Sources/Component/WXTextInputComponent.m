@@ -100,6 +100,7 @@
 - (UIView *)loadView
 {
     _inputView = [[WXTextInputView alloc] init];
+    _inputView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     __weak typeof(self) weakSelf = self;
     _inputView.deleteBlock = ^ {
         [weakSelf fireEvent:@"delete" params:nil];
