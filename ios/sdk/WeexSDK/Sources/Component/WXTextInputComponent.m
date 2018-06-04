@@ -63,12 +63,21 @@
 {
     return [self textRectForBounds:bounds];
 }
+
+- (void)deleteBackward {
+    if (self.deleteBlock) {
+        self.deleteBlock();
+    }
+    [super deleteBackward];
+}
+
 @end
 
 @interface WXTextInputComponent()
 
 @property (nonatomic, strong) WXTextInputView *inputView;
 @property (nonatomic, assign) BOOL allowCopyPaste;
+@property (nonatomic, assign) BOOL showClearWhileEditing;
 
 @end
 
@@ -81,6 +90,9 @@
         if (attributes[@"allowCopyPaste"]) {
             _allowCopyPaste = [WXConvert BOOL:attributes[@"allowCopyPaste"]];
         }
+        if (attributes[@"showClearWhileEditing"]) {
+            _showClearWhileEditing = [WXConvert BOOL:attributes[@"showClearWhileEditing"]];
+        }
     }
     return self;
 }
@@ -88,6 +100,14 @@
 - (UIView *)loadView
 {
     _inputView = [[WXTextInputView alloc] init];
+    _inputView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    __weak typeof(self) weakSelf = self;
+    _inputView.deleteBlock = ^ {
+        [weakSelf fireEvent:@"delete" params:nil];
+    };
+    if (_showClearWhileEditing) {
+        _inputView.clearButtonMode = UITextFieldViewModeWhileEditing;
+    }
     return _inputView;
 }
 
@@ -95,6 +115,9 @@
     [super updateAttributes:attributes];
     if (attributes[@"allowCopyPaste"]) {
         _allowCopyPaste = [WXConvert BOOL:attributes[@"allowCopyPaste"]];
+    }
+    if (attributes[@"showClearWhileEditing"]) {
+        _showClearWhileEditing = [WXConvert BOOL:attributes[@"showClearWhileEditing"]];
     }
 }
 

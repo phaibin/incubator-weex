@@ -33,6 +33,7 @@ WX_EXPORT_METHOD(@selector(open:success:failure:))
 WX_EXPORT_METHOD(@selector(close:success:failure:))
 WX_EXPORT_METHOD(@selector(push:callback:))
 WX_EXPORT_METHOD(@selector(pop:callback:))
+WX_EXPORT_METHOD(@selector(popToRoot:callback:))
 WX_EXPORT_METHOD(@selector(setNavBarBackgroundColor:callback:))
 WX_EXPORT_METHOD(@selector(setNavBarLeftItem:callback:))
 WX_EXPORT_METHOD(@selector(clearNavBarLeftItem:callback:))
@@ -86,6 +87,17 @@ WX_EXPORT_METHOD(@selector(setNavBarHidden:callback:))
     id<WXNavigationProtocol> navigator = [self navigator];
     UIViewController *container = self.weexInstance.viewController;
     [navigator popViewControllerWithParam:param completion:^(NSString *code, NSDictionary *responseData) {
+        if (callback && code) {
+            callback(code);
+        }
+    } withContainer:container];
+}
+
+- (void)popToRoot:(NSDictionary *)param callback:(WXModuleCallback)callback
+{
+    id<WXNavigationProtocol> navigator = [self navigator];
+    UIViewController *container = self.weexInstance.viewController;
+    [navigator popToRootViewControllerWithParam:param completion:^(NSString *code, NSDictionary *responseData) {
         if (callback && code) {
             callback(code);
         }
