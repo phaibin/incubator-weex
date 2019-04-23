@@ -738,6 +738,8 @@ do {\
             _coreTextFrameRef = NULL;
         }
         if(!attributedStringCopy) {
+            CGPathRelease(cgPath);
+            cgPath = NULL;
             return;
         }
         CTFramesetterRef ctframesetterRef = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)(attributedStringCopy));

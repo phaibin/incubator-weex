@@ -492,9 +492,9 @@ CGFloat WXFloorPixelValue(CGFloat value)
                         }
                         fontFamily = (__bridge_transfer  NSString*)CGFontCopyPostScriptName(newFont);
                         CGFontRelease(newFont);
-                        CFRelease(fontURL);
                         CFRelease(fontDataProvider);
                     }
+                    CFRelease(fontURL);
                 } else {
                     CFErrorRef error = nil;
                     CTFontManagerRegisterFontsForURL(fontURL, kCTFontManagerScopeProcess, &error);
