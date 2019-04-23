@@ -75,6 +75,9 @@ extern NSString *const bundleUrlOptionKey;
  **/
 @property (nonatomic, assign) BOOL needPrerender;
 
+// Map to vue's navigation property
+@property (nonatomic, retain) NSString *pageTitle;
+
 /**
  * The state of current instance.
  **/

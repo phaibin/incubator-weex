@@ -137,6 +137,13 @@
             _testId = [WXConvert NSString:attributes[@"testId"]];
         }
         
+        if (attributes[@"navigation"]) {
+            _weexInstance.pageTitle = [WXConvert NSString:attributes[@"navigation"]];
+        }
+        if (attributes[@"alt"]) {
+            _alt = [WXConvert NSString:attributes[@"alt"]];
+        }
+        
         [self _setupNavBarWithStyles:_styles attributes:_attributes];
         [self _initCSSNodeWithStyles:_styles];
         [self _initViewPropertyWithStyles:_styles];
