@@ -118,6 +118,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, weak, nullable) WXComponent *supercomponent;
 
+// The image's alt property
+@property (nonatomic, retain) NSString *alt;
+
 ///--------------------------------------
 /// @name Layout
 ///--------------------------------------

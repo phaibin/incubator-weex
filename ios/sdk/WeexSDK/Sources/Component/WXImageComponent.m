@@ -35,7 +35,7 @@
 #import <pthread/pthread.h>
 
 @interface WXImageView : UIImageView
-
+@property(nonatomic, weak) WXComponent *component;
 @end
 
 @implementation WXImageView
@@ -215,7 +215,9 @@ WX_EXPORT_METHOD(@selector(save:))
 
 - (UIView *)loadView
 {
-    return [[WXImageView alloc] init];
+    WXImageView *imageView = [[WXImageView alloc] init];
+    imageView.component = self;
+    return imageView;
 }
 
 - (void)addEvent:(NSString *)eventName {

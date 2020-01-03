@@ -159,7 +159,7 @@ WX_EXPORT_METHOD(@selector(setTextFormatter:))
 - (void)viewDidLoad
 {
     UIView * view = self.view;
-    if ([view isKindOfClass:[UITextField class]]){
+    if ([view isKindOfClass:[WXTextInputView class]]){
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFiledEditChanged:)
                                                      name:UITextFieldTextDidChangeNotification
                                                    object:view];

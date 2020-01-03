@@ -32,6 +32,7 @@
 // WXText is a non-public is not permitted
 @interface WXTextView : WXView
 @property (nonatomic, strong) NSTextStorage *textStorage;
+@property(nonatomic, weak) WXTextComponent *component;
 @end
 
 @implementation WXTextView
@@ -350,7 +351,9 @@ do {\
 
 - (UIView *)loadView
 {
-    return [[WXTextView alloc] init];
+    WXTextView *textView = [[WXTextView alloc] init];
+    textView.component = self;
+    return textView;
 }
 
 - (BOOL)needsDrawRect
@@ -738,6 +741,8 @@ do {\
             _coreTextFrameRef = NULL;
         }
         if(!attributedStringCopy) {
+            CGPathRelease(cgPath);
+            cgPath = NULL;
             return;
         }
         CTFramesetterRef ctframesetterRef = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)(attributedStringCopy));
