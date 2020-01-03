@@ -51,6 +51,8 @@
 
 @property (nonatomic, strong) NSString *source;
 
+@property (nonatomic, assign) BOOL canGoForward;
+
 // save source during this initialization
 @property (nonatomic, strong) NSString *inInitsource;
 
@@ -80,6 +82,10 @@ WX_EXPORT_METHOD(@selector(goForward))
             self.inInitsource = attributes[@"source"];
         }
         
+        self.canGoForward = YES;
+        if(attributes[@"canGoForward"]){
+            self.canGoForward = [attributes[@"canGoForward"] boolValue];
+        }
     }
     return self;
 }
@@ -303,7 +309,11 @@ WX_EXPORT_METHOD(@selector(goForward))
         [data setObject:request.URL.absoluteString ?:@"" forKey:@"url"];
         [self fireEvent:@"pagestart" params:data];
     }
-    return YES;
+    if (self.canGoForward) {
+        return YES;
+    } else {
+        return [request.URL.absoluteString isEqualToString: self.url];
+    }
 }
 
 @end
