@@ -114,28 +114,28 @@ WX_EXPORT_METHOD(@selector(goForward))
     };
 
     //Weex catch postMessage event from web
-    _jsContext[@"postMessage"] = ^() {
-
-        NSArray *args = [JSContext currentArguments];
-
-        if (args && args.count < 2) {
-            return;
-        }
-
-        NSDictionary *data = [args[0] toDictionary];
-        NSString *origin = [args[1] toString];
-
-        if (data == nil) {
-            return;
-        }
-
-        NSDictionary *initDic = @{ @"type" : @"message",
-                                   @"data" : data,
-                                   @"origin" : origin
-        };
-
-        [weakSelf fireEvent:@"message" params:initDic];
-    };
+//    _jsContext[@"postMessage"] = ^() {
+//
+//        NSArray *args = [JSContext currentArguments];
+//
+//        if (args && args.count < 2) {
+//            return;
+//        }
+//
+//        NSDictionary *data = [args[0] toDictionary];
+//        NSString *origin = [args[1] toString];
+//
+//        if (data == nil) {
+//            return;
+//        }
+//
+//        NSDictionary *initDic = @{ @"type" : @"message",
+//                                   @"data" : data,
+//                                   @"origin" : origin
+//        };
+//
+//        [weakSelf fireEvent:@"message" params:initDic];
+//    };
 
     self.source = _inInitsource;
     if (_url) {
